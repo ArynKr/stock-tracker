@@ -1,0 +1,1 @@
+export { stockSlice } from './stockSlice';
