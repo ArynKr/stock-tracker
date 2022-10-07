@@ -2,13 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { BsFillCaretUpFill, BsFillCaretDownFill } from 'react-icons/bs';
 import useStore from '../store';
 import finnHub from '../apis/finnHub';
+import { useNavigate } from 'react-router-dom';
 
 export const StockList = () => {
+  const navigate = useNavigate();
   const { wishlist, setWishlist } = useStore();
   const [stocks, setStocks] = useState([]);
 
-  const removeStock = (stockSymbol) => {
+  const removeStock = (e, stockSymbol) => {
     setWishlist(wishlist.filter(prevSymbol => prevSymbol !== stockSymbol))
+    e.stopPropagation()
+  }
+
+  const handleStockClick = (stockSymbol) => {
+    navigate(`/detail/${stockSymbol}`)
   }
   
   useEffect(() => {
@@ -73,7 +80,7 @@ export const StockList = () => {
         </thead>
         {stocks?.map((stock, idx) => (
           <tbody className={`${idx % 2 ? 'bg-gray-100' : ''}`} key={stock.symbol}>
-            <tr>
+            <tr onClick={() => handleStockClick(stock.symbol)} className="cursor-pointer">
               <td className="text-center px-3 py-1">{stock.symbol}</td>
               <td className="text-center px-3 py-1">{stock.data.c}</td>
               <td className={`text-center px-3 py-1 ${stock.data.d > 0 ? 'text-green-600' : 'text-red-600'}`}>
@@ -92,7 +99,7 @@ export const StockList = () => {
               <td className="text-center px-3 py-1">{stock.data.l}</td>
               <td className="text-center px-3 py-1">{stock.data.o}</td>
               <td className="text-center px-3 py-1">{stock.data.pc}</td>
-              <td className="text-center px-3 py-1"><button className='text-xs px-1 rounded border-red-600 border-2 text-red-600 hover:bg-red-600 hover:text-white' onClick={()=>removeStock(stock.symbol)}>Remove</button></td>
+              <td className="text-center px-3 py-1"><button className='text-xs px-1 rounded border-red-600 border-2 text-red-600 hover:bg-red-600 hover:text-white' onClick={(e)=>removeStock(e, stock.symbol)}>Remove</button></td>
             </tr>
           </tbody>
         ))}
