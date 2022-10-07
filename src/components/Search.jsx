@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import finnHub from '../apis/finnHub';
+import useStore from '../store';
 
 export const Search = () => {
   const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState(null);
+  const {wishlist, setWishlist} = useStore();
+
+  const addStock = (stockSymbol) => {
+    if(wishlist.indexOf(stockSymbol) !== -1) return;
+    setWishlist([...wishlist, stockSymbol]);
+    setSearchText("");
+  }
 
   useEffect(() => {
     let isMounted = true;
@@ -29,10 +37,10 @@ export const Search = () => {
   const SearchResult = () => {
     if (!searchResults) return null;
     return (
-      <div className="absolute border-2 w-full border-t-0 px-4 py-1 backdrop-blur-lg max-h-[50vh] overflow-y-auto">
+      <div className="absolute border-2 w-full border-t-0  py-1 backdrop-blur-lg max-h-[50vh] overflow-y-auto">
         <ul>
           {searchResults.map((stock) => (
-            <li>{stock.description}</li>
+            <li key={stock.symbol} onClick={()=>addStock(stock.symbol)} className='cursor-pointer px-4 hover:bg-slate-200'>{stock.description}</li>
           ))}
         </ul>
       </div>
