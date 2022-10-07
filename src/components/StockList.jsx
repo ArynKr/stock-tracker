@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BsFillCaretUpFill, BsFillCaretDownFill } from 'react-icons/bs';
 import useStore from '../store';
 import finnHub from '../apis/finnHub';
-import { useNavigate } from 'react-router-dom';
 
 export const StockList = () => {
   const navigate = useNavigate();
