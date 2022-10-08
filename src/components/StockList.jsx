@@ -68,7 +68,7 @@ export const StockList = () => {
   return (
     <div className="container mx-auto overflow-x-scroll rounded pb-2">
       <p className='my-6 text-3xl font-bold text-center'>Wishlist</p>
-      <div className='max-h-[17rem] overflow-y-scroll'>
+      <div className='h-[17rem] overflow-y-scroll'>
         <table className="leading-normal min-w-full">
           <thead className="bg-gray-200 sticky top-0">
             <tr>

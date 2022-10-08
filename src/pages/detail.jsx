@@ -77,7 +77,9 @@ export const StockDetail = () => {
     <div className="container mx-auto px-2">
       
       <div className='mt-8 flex flex-col gap-8'>
-        <Link to="/" className='border-2 w-min rounded px-2 border-blue-400 hover:bg-blue-400 text-blue-400 hover:text-white transition-colors'>Back</Link>
+        <div className='max-w-[70rem] mx-auto w-full'>
+          <Link to="/" className='border-2 w-min rounded px-2 border-blue-400 hover:bg-blue-400 text-blue-400 hover:text-white transition-colors'>Back</Link>
+        </div>
         <div>{!loading && <StockChart stockData={stockData} symbol={symbol} />}</div>
       </div>
     </div>

@@ -45,10 +45,10 @@ export const StockChart = ({stockData, symbol}) => {
   
   return (
     <div>
-      <div>
+      <div className='max-w-[70rem] mx-auto'>
         <Chart options={options} series={series} type="area" width='100%' />
       </div>
-      <div className='flex gap-2 text-sm px-4'>      
+      <div className='flex gap-2 text-sm px-4 max-w-[70rem] mx-auto'>      
         <button className={`border-blue-500 border-2 px-2 rounded outline-none transition-color ${interval===day ? 'bg-blue-500 text-white' : 'text-blue-500'}`} onClick={() => setInterval(day)}>
           24H
         </button>
