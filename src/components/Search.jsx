@@ -22,7 +22,6 @@ export const Search = () => {
             q: searchText,
           },
         });
-        console.log(data);
         if (isMounted) setSearchResults(data.result);
       } catch (err) {
         console.log(err);
@@ -37,7 +36,7 @@ export const Search = () => {
   const SearchResult = () => {
     if (!searchResults) return null;
     return (
-      <div className="absolute border-2 w-full border-t-0  py-1 backdrop-blur-lg max-h-[50vh] overflow-y-auto">
+      <div className="absolute border-2 w-full border-t-0  py-1 backdrop-blur-lg max-h-[50vh] overflow-y-auto z-10">
         <ul>
           {searchResults.map((stock) => (
             <li key={stock.symbol} onClick={()=>addStock(stock.symbol)} className='cursor-pointer px-4 hover:bg-slate-200'>{stock.description}</li>
@@ -48,7 +47,7 @@ export const Search = () => {
   };
 
   return (
-    <div className="container mx-auto mt-8">
+    <div className="container mx-auto mt-8 max-w-md">
       <div className="relative">
         <input
           type="text"
@@ -57,7 +56,7 @@ export const Search = () => {
           autoComplete="off"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
-          className="w-full focus:border-blue-200 border-2 border-gray-100 outline-none transition-colors duration-300 rounded px-4 py-1"
+          className="w-full focus:border-blue-200 border-2 border-gray-100 outline-none transition-colors duration-300 rounded px-4 py-1 md:py-2"
         />
         <SearchResult />
       </div>

@@ -1,14 +1,21 @@
 import { AppHome, StockDetail } from './pages';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Wrapper from './components/wrapper';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <AppHome />,
-  },
-  {
-    path: '/detail/:stockSymbol',
-    element: <StockDetail />,
+    element: <Wrapper />,
+    children: [
+      {
+        path: '',
+        element: <AppHome />
+      },
+      {
+        path: 'detail/:stockSymbol',
+        element: <StockDetail />,
+      },
+    ]
   },
 ]);
 

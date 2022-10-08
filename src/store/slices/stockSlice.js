@@ -1,4 +1,7 @@
 export const stockSlice = (set) => ({
   wishlist: [],
-  setWishlist: (payload) => set({ wishlist: payload }),
+  setWishlist: (payload) => {
+    localStorage.setItem('wishlist', payload?.toString())
+    set({ wishlist: payload })
+  },
 });
